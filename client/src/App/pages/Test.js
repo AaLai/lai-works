@@ -19,7 +19,14 @@ class Test extends Component {
   getTest = () => {
     fetch('http://ip-api.com/json/')
     .then(res => res.json())
-    .then(test => this.setState({ test }))
+    .then(data => fetch('/api/weather', {
+                          method: 'POST',
+                          headers: {'Content-Type': 'application/json'},
+                          body: JSON.stringify(data)
+                        })
+    )
+      .then(res => res.json())
+      .then(test => this.setState({ test }))
   }
 
   render() {
@@ -34,7 +41,7 @@ class Test extends Component {
           {test.city? (
             <div>
               {/* Render the list of items */}
-              {test.city}
+              You live in {test.city}, {test.country}
             </div>
           ) : (
             <div>
