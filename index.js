@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const secrets = require('./secrets')
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -15,10 +15,10 @@ app.get('/api/test', (req,res) => {
 });
 
 app.post('/api/weather', (req, res) => {
-  var test = req.body
-
-  console.log(test.city, test.countryCode)
-  res.json(req.body)
+  console.log(req.body.city, req.body.countryCode)
+  fetch('http://api.openweathermap.org/data/2.5/weather?q='+req.body.city+','+req.body.countryCode+'&appid='+process.env.Open_Weather_Key+'')
+  .then(res => res.json())
+  .then(data => res.send({data}))
 });
 
 // Handles requests that don't match above

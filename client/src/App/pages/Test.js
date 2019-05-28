@@ -31,24 +31,24 @@ class Test extends Component {
 
   render() {
     const { test } = this.state;
+    console.log(this.state)
 
     return (
       <div>
         <Navbar />
         <div className="App">
-          <h1>Testing here</h1>
-          {/* Check to see if any items are found*/}
-          {test.city? (
+          {test.data? (
             <div>
-              {/* Render the list of items */}
-              You live in {test.city}, {test.country}
+              <h1>Current Weather</h1>
+              <div>
+                The current weather at {test.data.name}, {test.data.sys.country} is {Math.round((test.data.main.temp - 273.15) * 10) / 10}&deg;C ({Math.round(((test.data.main.temp - 273.15) * 9/5 + 32) * 10) / 10}&deg;F), with {test.data.weather[0].main}
+              </div>
             </div>
           ) : (
             <div>
-              <h2>No List Items Found</h2>
+              <h2>Something is not working right now.... Please try again later</h2>
             </div>
-          )
-        }
+          )}
         </div>
       </div>
     );
