@@ -17,7 +17,7 @@ class Test extends Component {
 
   // Retrieves the list of items from the Express app
   getTest = () => {
-    fetch('/api/test')
+    fetch('http://ip-api.com/json/')
     .then(res => res.json())
     .then(test => this.setState({ test }))
   }
@@ -31,10 +31,10 @@ class Test extends Component {
         <div className="App">
           <h1>Testing here</h1>
           {/* Check to see if any items are found*/}
-          {test.length ? (
+          {test.city? (
             <div>
               {/* Render the list of items */}
-              {test}
+              {test.city}
             </div>
           ) : (
             <div>
