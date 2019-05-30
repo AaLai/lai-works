@@ -7,15 +7,15 @@ class Navbar extends Component {
   render() {
     return (
       <div style={{backgroundColor: '#282c34'}}>
-        <img src={logo} Alt='Logo' className="App-logo"/>
+        <img src={logo} alt='Logo' className="App-logo"/>
         <Link to={'/'}>
           <button variant="raised">
             Home
           </button>
         </Link>
-        <Link to={'./Test'}>
+        <Link to={'./Weather'}>
           <button variant="raised">
-            Test
+            Weather
           </button>
         </Link>
         <Link to={'./About'}>

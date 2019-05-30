@@ -14,11 +14,25 @@ app.get('/api/test', (req,res) => {
   console.log("test sent");
 });
 
-app.post('/api/weather', (req, res) => {
-  console.log(req.body.city, req.body.countryCode)
-  fetch('http://api.openweathermap.org/data/2.5/weather?q='+req.body.city+','+req.body.countryCode+'&appid='+process.env.Open_Weather_Key+'')
-  .then(res => res.json())
-  .then(data => res.send({data}))
+// uses client IP to find city and country for openweathermap api
+// comment out line 21 '+ req.ip' and add 24.48.0.1 to http address
+// after 'json/' to test on localhost
+app.get('/api/weather', (req, res) => {
+  console.log(req.ip)
+  fetch('http://ip-api.com/json/' + req.ip )
+  .then(ip => {
+    if (ip.ok) {
+      ip.json()
+      .then(ip => fetch('http://api.openweathermap.org/data/2.5/weather?q='+ip.city+','+ip.countryCode+'&appid='+process.env.Open_Weather_Key+'')
+      .then(weather => {
+        if (weather.ok) {
+          weather.json()
+          .then(data => res.send({data}))
+        }
+      }))
+    }
+  })
+  .catch(err => console.error("Something went wrong boss" + err))
 });
 
 // Handles requests that don't match above

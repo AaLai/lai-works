@@ -11,9 +11,9 @@ class Home extends Component {
           <div className="App">
             <h1>Welcome to Lai Works!</h1>
             {/* Link to test.js */}
-            <Link to={'./Test'}>
+            <Link to={'./Weather'}>
               <button variant="raised">
-                Test Button
+                Current Weather
               </button>
             </Link>
           </div>
