@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar'
+import ErrorPage from './ErrorPage'
 
 class Weather extends Component {
   // Initialize the state
@@ -37,7 +38,7 @@ class Weather extends Component {
             </div>
           ) : (
             <div>
-              <h2>Something is not working right now.... Please try again later</h2>
+              <ErrorPage/>
             </div>
           )}
         </div>
